@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css\style.css">
+	<style>
+		button, input {
+  			background: #87CEEB;
+  		}
+  		#ms {
+			color: #0675A0;
+		}
+	</style>
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+	<div id="all">
+		
+		<div id="block1">
+			<div id="lvl">Уровень: 1</div><br>
+			<div>(10)→(16):</div><div id="task">:</div>
+			<button onclick="add_text(0);">0</button>
+			<button onclick="add_text(1);">1</button>
+			<button onclick="add_text(2);">2</button>
+			<button onclick="add_text(3);">3</button>
+			<button onclick="add_text(4);">4</button>
+			<button onclick="add_text(5);">5</button>
+			<button onclick="add_text(6);">6</button>
+			<button onclick="add_text(7);">7</button>
+			<button onclick="add_text(8);">8</button>
+			<button onclick="add_text(9);">9</button>
+			<button onclick="add_text('A');">A</button>
+			<button onclick="add_text('B');">B</button>
+			<button onclick="add_text('C');">C</button>
+			<button onclick="add_text('D');">D</button>
+			<button onclick="add_text('E');">E</button>
+			<button onclick="add_text('F');">F</button>
+			<div>
+				<input type="text" id="answer" readonly="true" style="text-align:center;">
+				<input type="submit" value="OK" onclick="lvl();">
+			</div>
+		</div>
+		<div id="block2">
+			<p id="ms">Привет! На твоем пути будет 15 испытаний. Это три блока заданий. А еще есть сохранение на 5 и 10 уровнях!! Удачи!!! все получится!</p>
+			<img src="img\16.png">
+		</div>
+	</div>
+</body>
+	<script type="text/javascript">
+		var chp = 1;//Точка сохранения уровня
+		var level = 1;
+		var chislo = get_random_number(level);
+		function add_text(text) {
+			document.getElementById('answer').value += text;
+		}
+		
+		function lvl(){
+			var proverka = document.getElementById('answer').value;
+			if ( proverka == chislo.toString(16)) {    // рандомное число переводится в 16 сс
+				level++;
+				if (level > 15) {alert('Ты победил!');}
+			}
+			else {
+				level = chp;
+			}
+			switch (level) {
+				case 1:
+					document.getElementById("ms").innerHTML = "Давай попробуем заново. У тебя всё получится!";
+				    break;
+				case 2:
+					document.getElementById("ms").innerHTML = "Итак, ты справился с 1 уровнем.Молодец!!!";
+				    break;
+				case 3:
+					document.getElementById("ms").innerHTML = "Неплохо! Уже середина 1 отрезка пути.";
+				    break;
+				case 4:
+					document.getElementById("ms").innerHTML = "Еще один шаг до сохранения.Но знай, чтобы сохраниться надо верно ответить на 5 уровне!";
+				    break;
+				case 5:
+					chp = 5;
+					document.getElementById("ms").innerHTML = "О!Ты ты прошел 1 отрезок пути.ДАвай вперед к цели!Ко второму сохранению)";
+				    break;
+				case 6:
+					document.getElementById("ms").innerHTML = "Молодец!так держать!";
+				    break;
+				case 7:
+					document.getElementById("ms").innerHTML = "Середина второго отрезка пути,середина всего испытания!Давай,ты справишься!";
+				    break;
+				case 8:
+					document.getElementById("ms").innerHTML = "Вперед к цели!";
+				    break;
+				case 9:
+					document.getElementById("ms").innerHTML = "Еще один шаг до сохранения.Но знай, чтобы сохраниться надо верно ответить на 10 уровне!";
+				    break;
+				case 10:
+					chp = 10;
+					document.getElementById("ms").innerHTML = "О!Ты ты прошел вторую часть пути.Давай вперед к цели!";
+				    break;
+				case 11:
+					document.getElementById("ms").innerHTML = "Шаг за шагом и победа!";
+				    break;
+				case 12:
+					document.getElementById("ms").innerHTML = "Середина финального отрезка!Ты- молодец!";
+				    break;
+				case 13:
+					document.getElementById("ms").innerHTML = "Будь внимательным и цель будет достигнута!";
+				    break;
+				case 14:
+					document.getElementById("ms").innerHTML = "Молодец! Давай дальше!";
+				    break;
+				case 15:
+					document.getElementById("ms").innerHTML = "Последний шаг! Один ответ и ты у цели!";
+				    break;        	
+			}
+			document.getElementById("lvl").innerHTML = "Уровень: " + level;
+			document.getElementById("answer").value = "";
+			chislo = get_random_number(level);
+			document.getElementById('task').innerHTML = chislo;
+		}
+
+		function get_random_number(level) {
+			if (level <= 5) {
+				var r = Math.floor(Math.random() * 10) + 1;
+			}
+			if (level > 5 && level <= 10) {
+				var r = Math.floor(Math.random() * 100) + 10;
+			}
+			if (level > 10 && level <= 15) {
+				var r = Math.floor(Math.random() * 1000) + 100;
+			}
+			return r;			
+		}
+		document.getElementById('task').innerHTML = chislo;
+	</script>
+</html>
